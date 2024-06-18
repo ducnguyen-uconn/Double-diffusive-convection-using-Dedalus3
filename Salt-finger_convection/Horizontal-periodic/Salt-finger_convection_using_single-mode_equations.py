@@ -57,111 +57,6 @@ import dedalus.public as d3
 
 # Quantities are decomposed into a horizontal averaged component marked by $\bar{.}$ and a single harmonic in the horizontal direction associated with the wavenumber pair ($k_x$,$k_y$) and characterised by the comple amplitude marked by $\hat{.}$. For 2D configuration, velocity can be decomposed into a large-scale shear $\bar{U}_{0} (z,t) \mathbf{e}_x$ and a harmonic with the same wavenumber pair ($k_x$,$k_y$). This allows generating a mean flow in the horizontal direction by assuming that the large-scale shear $\bar{\mathbf{u}}_0$ is generated in the x-direction. **In three dimensions, the large-scale shear can be oriented in principle in any horizontal direction, a possibility that is left for future study**. 
 
-# Now, we substitute above equations into the governing equation mentioned.
-# $$
-# \partial_t \mathbf{u}+\mathbf{u}\cdot\nabla\mathbf{u} = Pr\nabla^2\mathbf{u} -\nabla p + PrRa_{T}(T-R_{\rho}^{-1}S)\mathbf{e}_z,
-# $$
-# $$
-# \Rightarrow 
-# \underbrace{\partial_t (\bar{U}_0 \mathbf{e}_x + \hat{\mathbf{u}} e^{i(k_x x + k_y y)})}_{A_1} +\underbrace{(\bar{U}_0 \mathbf{e}_x + \hat{\mathbf{u}} e^{i(k_x x + k_y y)})}_{A_2}\cdot\underbrace{\nabla (\bar{U}_0 \mathbf{e}_x + \hat{\mathbf{u}} e^{i(k_x x + k_y y)})}_{A_3}
-# = Pr\underbrace{\nabla^2(\bar{U}_0 \mathbf{e}_x + \hat{\mathbf{u}} e^{i(k_x x + k_y y)})}_{A_4}
-# $$
-# $$ - \underbrace{\nabla (\bar{P}_0 + \hat{p} e^{i(k_x x + k_y y)})}_{A_5} + PrRa_{T}\underbrace{((\bar{T}_0 + \hat{T} e^{i(k_x x + k_y y)})-R_{\rho}^{-1}(\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)}))\mathbf{e}_z}_{A_6},
-# $$
-# Let us separately consider components 
-# 
-
-# $$A_1 = \partial_t \bar{U}_0 \mathbf{e}_x + \partial_t\hat{\mathbf{u}} e^{i(k_x x + k_y y)},$$
-
-# $$A_2 = \bar{U}_0 \mathbf{e}_x + \hat{\mathbf{u}} e^{i(k_x x + k_y y)} = (\bar{U}_0 + \hat{u} e^{i(k_x x + k_y y)}, \hat{v} e^{i(k_x x + k_y y)}, \hat{w} e^{i(k_x x + k_y y)})$$
-# $$ = (\bar{U}_0 + \hat{u} e^{i(k_x x + k_y y)}, 0, \hat{w} e^{i(k_x x + k_y y)}),$$
-
-# The salinity equation 
-# $$
-# \partial_t S +\mathbf{u}\cdot\nabla S + w = \tau \nabla^2 S,
-# $$
-# $$
-# \Rightarrow 
-# \underbrace{\partial_t (\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)})}_{A_1} +\underbrace{(\bar{U}_0 \mathbf{e}_x + \hat{\mathbf{u}} e^{i(k_x x + k_y y)})}_{A_2}\cdot\underbrace{\nabla (\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)})}_{A_3} + \hat{w} e^{i(k_x x + k_y y)} 
-# $$
-# $$
-# = \tau\underbrace{\nabla^2 (\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)})}_{A_4},\\
-# $$
-# Let us separately consider components 
-# 
-
-# $$A_1 = \partial_t \bar{S}_0 + \partial_t\hat{S} e^{i(k_x x + k_y y)},$$
-
-# $$A_2 = \bar{U}_0 \mathbf{e}_x + \hat{\mathbf{u}} e^{i(k_x x + k_y y)} = (\bar{U}_0 + \hat{u} e^{i(k_x x + k_y y)}, \hat{v} e^{i(k_x x + k_y y)}, \hat{w} e^{i(k_x x + k_y y)})$$
-# $$ = (\bar{U}_0 + \hat{u} e^{i(k_x x + k_y y)}, 0, \hat{w} e^{i(k_x x + k_y y)}),$$
-
-# $$A_3 = \nabla (\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)}) = (\partial_x(\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)}), \partial_y(\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)}), \partial_z(\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)}))$$
-# $$= (\hat{S} \partial_x e^{i(k_x x + k_y y)}, \hat{S} \partial_y e^{i(k_x x + k_y y)}, \partial_z\bar{S}_0 + \partial_z\hat{S} e^{i(k_x x + k_y y)})$$
-# $$= (i k_x \hat{S} e^{i(k_x x + k_y y)}, i k_y \hat{S} e^{i(k_x x + k_y y)}, \partial_z\bar{S}_0 + \partial_z\hat{S} e^{i(k_x x + k_y y)}), $$
-
-# $$
-# \Rightarrow 
-# A_2 \cdot A_3 = (\bar{U}_0 + \hat{u} e^{i(k_x x + k_y y)}, 0, \hat{w} e^{i(k_x x + k_y y)})\cdot(i k_x \hat{S} e^{i(k_x x + k_y y)}, i k_y \hat{S} e^{i(k_x x + k_y y)}, \partial_z\bar{S}_0 + \partial_z\hat{S} e^{i(k_x x + k_y y)})
-# $$
-# $$
-# = (\bar{U}_0 + \hat{u} e^{i(k_x x + k_y y)})(i k_x \hat{S} e^{i(k_x x + k_y y)})
-#  + \hat{w} e^{i(k_x x + k_y y)} (\partial_z\bar{S}_0 + \partial_z\hat{S} e^{i(k_x x + k_y y)})
-# $$
-# $$
-# = i k_x \bar{U}_0\hat{S} e^{i(k_x x + k_y y)} + i k_x \hat{u}\hat{S}+ \partial_z\bar{S}_0\hat{w} e^{i(k_x x + k_y y)} + \hat{u}\partial_z\hat{S},
-# $$
-
-# $$A_4 = \nabla^2 (\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)}) = (\partial_x^2+\partial_y^2) (\hat{S} e^{i(k_x x + k_y y)})+\partial_z^2 (\bar{S}_0 + \hat{S} e^{i(k_x x + k_y y)})$$
-# $$ = -(k_x^2+k_y^2)\hat{S} e^{i(k_x x + k_y y)} + \partial_z^2 \bar{S}_0 + \partial_z^2 \hat{S} e^{i(k_x x + k_y y)},$$
-
-# So, the salinity equation becomes
-# $$
-# \partial_t \bar{S}_0 + \partial_t\hat{S} e^{i(k_x x + k_y y)} + i k_x \bar{U}_0\hat{S} e^{i(k_x x + k_y y)} +i k_x \hat{u}\hat{S}+ \partial_z\bar{S}_0\hat{w} e^{i(k_x x + k_y y)} + \hat{u}\partial_z\hat{S}+ \hat{w} e^{i(k_x x + k_y y)} 
-# $$
-# $$= -(k_x^2+k_y^2)\tau\hat{S} e^{i(k_x x + k_y y)} + \partial_z^2 \tau\bar{S}_0 + \partial_z^2 \tau\hat{S} e^{i(k_x x + k_y y)},
-# $$
-
-# $$
-# \Rightarrow 
-# \partial_t \bar{S}_0 + \hat{u}\partial_z\hat{S}+i k_x \hat{u}\hat{S}
-# + (\partial_t\hat{S} + i k_x \bar{U}_0\hat{S} + \partial_z\bar{S}_0 \hat{w}+ \hat{w}) e^{i(k_x x + k_y y)}
-# $$
-# $$
-# = \partial_z^2 \tau\bar{S}_0 + \tau(-(k_x^2+k_y^2)+\partial_z^2 )\hat{S} e^{i(k_x x + k_y y)},
-# $$
-
-# Balance the horizontally averaged components, we have:
-# \begin{equation}
-# \boxed{\partial_t \bar{S}_0 + i k_x \hat{u}\hat{S}+\hat{u}\partial_z\hat{S} = \tau\partial_z^2 \bar{S}_0},
-# \end{equation}
-
-# Balance the harmonic components, we have:
-# $$
-# \partial_t\hat{S} + i k_x \bar{U}_0\hat{S} + \partial_z\bar{S}_0 \hat{w}+ \hat{w} = \tau(-(k_x^2+k_y^2)+\partial_z^2)\hat{S},
-# $$
-# $$
-# \Leftrightarrow
-# \boxed{\partial_t\hat{S} + i k_x \bar{U}_0\hat{S} + \partial_z\bar{S}_0 \hat{w}+ \hat{w} = \tau\hat{\nabla}^2 \hat{S}},
-# $$
-# with $\hat{\nabla}^2 = \partial_z^2-k_x^2-k_y^2$.
-
-# Similar transformation for temperature's governing equation, we obtained:
-# $$
-# \partial_t \bar{T}_0 + \hat{u}\partial_z\hat{T}+i k_x \hat{u}\hat{T}
-# + (\partial_t\hat{T} + i k_x \bar{U}_0\hat{T} + \partial_z\bar{T}_0 \hat{w}+ \hat{w}) e^{i(k_x x + k_y y)}
-# $$
-# $$
-# = \partial_z^2 \tau\bar{T}_0 + \tau(-(k_x^2+k_y^2)+\partial_z^2 )\hat{T} e^{i(k_x x + k_y y)}.
-# $$
-# Then, we have
-# \begin{equation}
-# \boxed{\partial_t \bar{T}_0 + i k_x \hat{u}\hat{T}+\hat{u}\partial_z\hat{T} = \tau\partial_z^2 \bar{T}_0},
-# \end{equation}
-# and 
-# \begin{equation}
-# \boxed{\partial_t\hat{T} + i k_x \bar{U}_0\hat{T} + \partial_z\bar{T}_0 \hat{w}+ \hat{w} = \tau\hat{\nabla}^2 \hat{T}},
-# \end{equation}
-
 # Finally, we have new governing equations obtained from original governing equations and single-mode equations. Terms of the vertical velocity $w$ and vertical vorticity $\zeta:=\partial_y u-\partial_x v$ :
 # $$
 # \begin{gathered}
@@ -176,6 +71,8 @@ import dedalus.public as d3
 # \end{gathered}
 # $$
 # where the superscript * denotes a complex conjugate and $\hat{\nabla}^2:=\partial_z^2-k_x^2-k_y^2, \hat{\nabla}_{\perp}^2:=$ $-k_x^2-k_y^2, \quad \hat{\nabla}^4:=\partial_z^4-2\left(k_x^2+k_y^2\right) \partial_z^2+\left(k_x^2+k_y^2\right)^2, \quad \bar{U}_0^{\prime}:=\partial_z \bar{U}_0$ and $\bar{U}_0^{\prime \prime}:=\partial_z^2 \bar{U}_0$. 
+
+# As shown in above equations, we can see that single-mode equations only depend on z-direction. This reduces one dimension for system.
 
 # In[2]:
 
@@ -208,7 +105,7 @@ dist = d3.Distributor(coords, dtype=np.complex128)
 
 
 # define the coordinate system
-zbasis = d3.ChebyshevT(coords, size=Nz, bounds=(0, Lz), dealias=dealias)
+zbasis = d3.Chebyshev(coords, size=Nz, bounds=(0, Lz), dealias=dealias)
 
 
 # Now, we will instantiate fields which will appears within the problem using the distributor, including pressure $p$, velocity $\vec{u}$, temperature $T$, and salinity $S$.
@@ -242,19 +139,22 @@ hatT    = dist.Field(name='hatT', bases=(zbasis))
 barS0   = dist.Field(name='barS0', bases=(zbasis)) 
 hatS    = dist.Field(name='hatS', bases=(zbasis)) 
 
-# define output fields for analysis and visualization
-# u = dist.Field(name='u', bases=(xbasis,zbasis)) 
-# T = dist.Field(name='T', bases=(xbasis,zbasis)) 
-# S = dist.Field(name='S', bases=(xbasis,zbasis)) 
-
-tau_barU0   = dist.Field(name='tau_barU0')
-tau_hatu    = dist.Field(name='tau_hatu')
-tau_hatw    = dist.Field(name='tau_hatw')
-tau_hatzeta = dist.Field(name='tau_hatzeta')
-tau_barT0   = dist.Field(name='tau_barT0')
-tau_hatT    = dist.Field(name='tau_hatT')
-tau_barS0   = dist.Field(name='tau_barS0')
-tau_hatS    = dist.Field(name='tau_hatS')
+tau_barU0_1   = dist.Field(name='tau_barU0_1')
+tau_barU0_2   = dist.Field(name='tau_barU0_2')
+tau_hatw_1    = dist.Field(name='tau_hatw_1')
+tau_hatw_2    = dist.Field(name='tau_hatw_2')
+tau_hatw_3    = dist.Field(name='tau_hatw_3')
+tau_hatw_4    = dist.Field(name='tau_hatw_4')
+tau_hatzeta_1 = dist.Field(name='tau_hatzeta_1') 
+tau_hatzeta_2 = dist.Field(name='tau_hatzeta_2')
+tau_barT0_1   = dist.Field(name='tau_barT0_1') 
+tau_barT0_2   = dist.Field(name='tau_barT0_2')
+tau_hatT_1    = dist.Field(name='tau_hatT_1')
+tau_hatT_2    = dist.Field(name='tau_hatT_2')
+tau_barS0_1   = dist.Field(name='tau_barS0_1')
+tau_barS0_2   = dist.Field(name='tau_barS0_2')
+tau_hatS_1    = dist.Field(name='tau_hatS_1')
+tau_hatS_2    = dist.Field(name='tau_hatS_2')
 
 
 # To simply when typing and determining the equations in Dedalus3, we can define replace operators for complex operators
@@ -264,12 +164,12 @@ tau_hatS    = dist.Field(name='tau_hatS')
 
 # Substitutions
 z = dist.local_grids(zbasis) # get coordinate arrays in horizontal and vertical directions
-# print(z)
-# ex, ez = coords.unit_vector_fields(dist) # get unit vectors in horizontal and vertical directions
+
 i = 1j
 conj = lambda A: np.conj(A)
 dz = lambda A: d3.Differentiate(A, coords) 
-lift_basis = zbasis.derivative_basis(1) 
+
+lift_basis = zbasis.derivative_basis(1)
 lift = lambda A: d3.Lift(A, lift_basis, -1)
 
 
@@ -299,14 +199,30 @@ hatnabla4 = lambda A: (dz(dz(dz(dz(A)))) - 2*kx2ky2*dz(dz(A)) + kx2ky2*kx2ky2*A)
 
 
 # Problem
-problem = d3.IVP([barU0,tau_barU0,
-                  hatu,tau_hatu,
-                  hatw,tau_hatw,
-                  hatzeta,tau_hatzeta,
-                  barS0,tau_barS0,
-                  hatS,tau_hatS,
-                  barT0,tau_barT0,
-                  hatT,tau_hatT], namespace=locals())
+problem = d3.IVP([barU0,tau_barU0_1,tau_barU0_2,
+                  hatu,
+                  hatw,tau_hatw_1,tau_hatw_2,tau_hatw_3,tau_hatw_4,
+                  hatzeta,tau_hatzeta_1,tau_hatzeta_2,
+                  barS0,tau_barS0_1,tau_barS0_2,
+                  hatS,tau_hatS_1,tau_hatS_2,
+                  barT0,tau_barT0_1,tau_barT0_2,
+                  hatT,tau_hatT_1,tau_hatT_2
+                  ], namespace=locals())
+
+
+# In[ ]:
+
+
+# Tau polynomials
+tau_basis = zbasis.derivative_basis(2)
+p1 = dist.Field(bases=tau_basis)
+p2 = dist.Field(bases=tau_basis)
+p3 = dist.Field(bases=tau_basis)
+p4 = dist.Field(bases=tau_basis)
+p1['c'][-1] = 1
+p2['c'][-2] = 2
+p3['c'][-3] = 3
+p4['c'][-4] = 4
 
 
 # $$
@@ -321,7 +237,8 @@ problem = d3.IVP([barU0,tau_barU0,
 
 
 # equation 1
-problem.add_equation("dt(hatnabla2(hatw)) - Pr*hatnabla4(hatw) - Pr*hatnabla2perp*Ra*(hatT-(1./Rp)*hatS) = - i*kx*barU0*hatnabla2(hatw) + i*kx*dz(dz(barU0))*hatw")
+problem.add_equation("dt(hatnabla2(hatw)) - Pr*hatnabla4(hatw) - Pr*hatnabla2perp*Ra*(hatT-(1./Rp)*hatS) +  tau_hatw_1*p1+ tau_hatw_2*p2+tau_hatw_3*p3+ tau_hatw_4*p4 = - i*kx*barU0*hatnabla2(hatw) + i*kx*dz(dz(barU0))*hatw")
+# problem.add_equation("dt(hatnabla2(hatw)) - Pr*hatnabla4(hatw) +  tau_hatw_1*p1+ tau_hatw_2*p2 +tau_hatw_3*p3+ tau_hatw_4*p4 = - i*kx*barU0*hatnabla2(hatw) + i*kx*dz(dz(barU0))*hatw")
 
 
 # $$
@@ -345,11 +262,11 @@ problem.add_equation("dt(hatnabla2(hatw)) - Pr*hatnabla4(hatw) - Pr*hatnabla2per
 
 
 # equation 2
-problem.add_equation("dt(hatzeta) - Pr*hatnabla2(hatzeta) = - i*kx*barU0*hatzeta")
+problem.add_equation("dt(hatzeta) - Pr*hatnabla2(hatzeta) + tau_hatzeta_1*p1+ tau_hatzeta_2*p2= - i*kx*barU0*hatzeta")
 # equation 3
-problem.add_equation("dt(hatT) + hatw - hatnabla2(hatT) = - i*kx*barU0*hatT - hatw*dz(barT0)")
-# # equation 4
-problem.add_equation("dt(hatS) + hatw - tau*hatnabla2(hatS) = - i*kx*barU0*hatS - hatw*dz(barS0)")
+problem.add_equation("dt(hatT) - hatnabla2(hatT) + hatw + tau_hatT_1*p1+ tau_hatT_2*p2= - i*kx*barU0*hatT - hatw*dz(barT0)")
+# equation 4
+problem.add_equation("dt(hatS) - tau*hatnabla2(hatS) + hatw + tau_hatS_1*p1+ tau_hatS_2*p2= - i*kx*barU0*hatS - hatw*dz(barS0)")
 
 
 # $$
@@ -364,11 +281,11 @@ problem.add_equation("dt(hatS) + hatw - tau*hatnabla2(hatS) = - i*kx*barU0*hatS 
 
 
 # equation 5
-problem.add_equation("dt(barU0) - Pr*dz(dz(barU0)) + lift(tau_barU0) = - dz(conj(hatw)*hatu+hatw*conj(hatu))")
-# equation 6
-problem.add_equation("dt(barT0) - dz(dz(barT0)) + lift(tau_barT0)= - dz(conj(hatw)*hatT+hatw*conj(hatT))")
-# equation 7
-problem.add_equation("dt(barS0) - tau*dz(dz(barS0)) + lift(tau_barS0)= - dz(conj(hatw)*hatS+hatw*conj(hatS))")
+problem.add_equation("dt(barU0) - Pr*dz(dz(barU0)) + tau_barU0_1*p1+ tau_barU0_2*p2= - dz(conj(hatw)*hatu+hatw*conj(hatu))")
+# # equation 6
+problem.add_equation("dt(barT0) - dz(dz(barT0)) + tau_barT0_1*p1+ tau_barT0_2*p2= - dz(conj(hatw)*hatT+hatw*conj(hatT))")
+# # equation 7
+problem.add_equation("dt(barS0) - tau*dz(dz(barS0)) + tau_barS0_1*p1+ tau_barS0_2*p2= - dz(conj(hatw)*hatS+hatw*conj(hatS))")
 
 
 # $$
@@ -381,7 +298,7 @@ problem.add_equation("dt(barS0) - tau*dz(dz(barS0)) + lift(tau_barS0)= - dz(conj
 # In[ ]:
 
 
-# equation 5
+# equation 8
 problem.add_equation("hatu = i*kx*dz(hatw)/kx2ky2 - i*ky*hatzeta/kx2ky2")
 
 
@@ -429,9 +346,11 @@ problem.add_equation("hatw(z=0) = 0")
 problem.add_equation("hatw(z=Lz) = 0")
 problem.add_equation("hatzeta(z=0) = 0")
 problem.add_equation("hatzeta(z=Lz) = 0")
-problem.add_equation("dz(hatw)(z=0) = 0") # ?
-problem.add_equation("dz(hatw)(z=Lz) = 0") # ?
+problem.add_equation("dz(hatw)(z=0) = 0") 
+problem.add_equation("dz(hatw)(z=Lz) = 0") 
 
+
+# Note that, we have two boundary conditions for each quantity, so we must have two tau fields.
 
 # ## Build Solver
 
@@ -439,8 +358,8 @@ problem.add_equation("dz(hatw)(z=Lz) = 0") # ?
 
 
 stop_sim_time = 300 # Stopping criteria
-timestepper = d3.RK443 # 3rd-order 4-stage DIRK+ERK scheme [Ascher 1997 sec 2.8] https://doi-org.ezproxy.lib.uconn.edu/10.1016/S0168-9274(97)00056-1
-# timestepper = d3.RK222
+# timestepper = d3.RK443 # 3rd-order 4-stage DIRK+ERK scheme [Ascher 1997 sec 2.8] doi 10.1016/S0168-9274(97)00056-1
+timestepper = d3.RK222
 # Solver
 solver = problem.build_solver(timestepper)
 solver.stop_sim_time = stop_sim_time
@@ -465,8 +384,8 @@ hatT.fill_random('g', seed=42, distribution='normal', scale=1e-3) # Random noise
 
 
 # Analysis
-import shutil, os
-sim_name = 'SMESFC_DNS'
+# import shutil, os
+# sim_name = 'SMESFC_DNS'
 # if os.path.exists(sim_name):
 #     shutil.rmtree(sim_name) # remove the output directory and its previous contents
 
@@ -483,27 +402,39 @@ sim_name = 'SMESFC_DNS'
 # In[ ]:
 
 
-max_timestep = 0.125
-# CFL
-CFL = d3.CFL(solver, initial_dt=max_timestep, cadence=10, safety=0.5, threshold=0.05,
-             max_change=1.5, min_change=0.5, max_dt=max_timestep)
-# CFL.add_velocity(barU0+hatu*np.exp(i*(kx*x)))
+# Setup storage
+barS0.change_scales(1)
+barS0_list = [np.copy(barS0['g'])]
+t_list = [solver.sim_time]
+# Main loop
+print('Starting main loop')
+timestep = 0.05
+while solver.proceed:
+    solver.step(timestep)
+    if solver.iteration % 10 == 0:
+        barS0.change_scales(1)
+        barS0_list.append(np.copy(barS0['g']))
+        t_list.append(solver.sim_time)
+    if solver.iteration % 1000 == 0:
+        print('Completed iteration {}'.format(solver.iteration))
+        # print(barS0['g'])
+
+# Convert storage lists to arrays
+barS0_array = np.array(barS0_list)
+t_array = np.array(t_list)
 
 
 # In[ ]:
 
 
-# Main loop
-print('Starting main loop')
-while solver.proceed:
-    timestep = CFL.compute_timestep()
-    print(timestep)
-    solver.step(timestep)
-    if (solver.iteration-1) % 1000 == 0:
-        print('Completed iteration {}, time={:.3f}'.format(solver.iteration, solver.sim_time))
-        sa_plot = plt.pcolormesh(np.copy(barS0['g']).transpose())
-        plt.colorbar(sa_plot) 
-        plt.title("t = {:.3f}".format(solver.sim_time))
-        plt.savefig("salinity{:.3f}.png".format(solver.sim_time), dpi=200)
-        plt.close()
+# Plot solution
+plt.figure(figsize=(6, 7), dpi=100)
+plt.pcolormesh(z, t_array, np.real(barS0_array), shading='nearest')
+plt.colorbar()
+plt.xlabel('x')
+plt.ylabel('t')
+plt.title(r'$\bar{S}_0(t)$')
+plt.tight_layout()
+plt.savefig("BarS0.png", dpi=300, bbox_inches="tight")
+plt.show()
 
