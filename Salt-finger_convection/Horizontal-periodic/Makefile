@@ -3,17 +3,17 @@ clean:
 	rm -rf $(OUTPUT)
 
 # Salt-Finger Convection
-PDF_DNS:
-	jupyter nbconvert --to pdf SFC_sim_example.ipynb
-run_DNS:
-	jupyter nbconvert --to script Salt-finger-conection_sim_example.ipynb
-	python3 Salt-finger-conection_sim_example.py
+pdfdns:
+	jupyter nbconvert --to pdf dns.ipynb
+rundns:
+	jupyter nbconvert --to python dns.ipynb
+	python3 dns.py
 
 
-PDF_SME:
-	jupyter nbconvert --to pdf Salt-finger_convection_using_single-mode_equations.ipynb
-run_SME:
-	jupyter nbconvert --to script Salt-finger_convection_using_single-mode_equations.ipynb
-	python3 Salt-finger_convection_using_single-mode_equations.py
+pdfsm:
+	jupyter nbconvert --to pdf single-mode.ipynb
+runsm:
+	jupyter nbconvert --to python single-mode.ipynb
+	python3 single-mode.py
 
 

@@ -84,7 +84,7 @@ Nz = 128        # number of points
 dealias = 3/2   # scaling factor
 
 Ra = 1e5        # Rayleigh number
-Pr = 0.05       # Prandtl number
+Pr = 7.0       # Prandtl number
 tau = 0.01      # diffusivity ratio = ks/kt
 Rp = 40.0       # density ratio
 
@@ -384,19 +384,25 @@ hatT.fill_random('g', seed=42, distribution='normal', scale=1e-3) # Random noise
 
 
 # Analysis
-# import shutil, os
-# sim_name = 'SMESFC_DNS'
-# if os.path.exists(sim_name):
-#     shutil.rmtree(sim_name) # remove the output directory and its previous contents
+import glob
+import os
+sim_name = "EM"
+if os.path.exists(sim_name):
+    dir_path = '/'+sim_name
+    file_pattern = sim_name+"s*.h5" # pattern for file names to be deleted
+    file_paths = glob.glob(os.path.join(dir_path, file_pattern)) # get a list of file paths using the glob module
+    # loop over each file path and delete the file
+    for file_path in file_paths:
+        os.remove(file_path)
 
-# dataset = solver.evaluator.add_file_handler(sim_name, sim_dt=1.0, max_writes=1000)
-# dataset.add_task(barU0, name='barU0')
-# dataset.add_task(hatu, name='hatu')
-# dataset.add_task(hatw, name='hatw')
-# dataset.add_task(barS0, name='barS0')
-# dataset.add_task(hatS, name='hatS')
-# dataset.add_task(barT0, name='barT0')
-# dataset.add_task(hatT, name='hatT')
+dataset = solver.evaluator.add_file_handler(sim_name, sim_dt=50.0, max_writes=1000)
+dataset.add_task(barU0, name='barU0')
+dataset.add_task(hatu, name='hatu')
+dataset.add_task(hatw, name='hatw')
+dataset.add_task(barS0, name='barS0')
+dataset.add_task(hatS, name='hatS')
+dataset.add_task(barT0, name='barT0')
+dataset.add_task(hatT, name='hatT')
 
 
 # In[ ]:
