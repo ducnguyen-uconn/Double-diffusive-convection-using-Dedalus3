@@ -78,7 +78,7 @@ import dedalus.public as d3
 
 
 # Parameters
-kx, ky = 1, 0   # wavenumber
+kx, ky = 4, 0   # wavenumber
 Lz = 1.         # computational domain
 Nz = 128        # number of points
 dealias = 3/2   # scaling factor
@@ -386,7 +386,7 @@ hatT.fill_random('g', seed=42, distribution='normal', scale=1e-3) # Random noise
 # Analysis
 import glob
 import os
-sim_name = "EM"
+sim_name = "singlemode"
 if os.path.exists(sim_name):
     dir_path = '/'+sim_name
     file_pattern = sim_name+"s*.h5" # pattern for file names to be deleted

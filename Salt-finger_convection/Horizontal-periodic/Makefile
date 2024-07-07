@@ -16,4 +16,5 @@ runsm:
 	jupyter nbconvert --to python single-mode.ipynb
 	python3 single-mode.py
 
-
+runtf1:
+	python3 single-mode_TF1.py
